@@ -22,33 +22,8 @@ grid = [
 ]
 
 
-# The agent's current position is stored as a row and column coordinate
-
-
 def agent_position(row, col):
     return (row, col)
-
-
-print(agent_position(0, 0))
-
-row = 2
-col = 2
-
-up = (row - 1, col)
-down = (row + 1, col)
-left = (row, col - 1)
-right = (row, col + 1)
-
-print("UP", up)
-print("DOWN", down)
-print("LEFT", left)
-print("RIGHT", right)
-
-
-up_cell = grid[up[0]][up[1]]
-down_cell = grid[down[0]][down[1]]
-left_cell = grid[left[0]][left[1]]
-right_cell = grid[right[0]][right[1]]
 
 
 def is_valid_move(cell):
@@ -59,7 +34,8 @@ def is_goal(cell):
     return cell == "G"
 
 
-print(is_valid_move(right_cell))
+def in_bounds(row, col, grid):
+    return 0 <= row < len(grid) and 0 <= col < len(grid[0])
 
 
 def heuristic(current, goal):
@@ -69,6 +45,55 @@ def heuristic(current, goal):
     goal_col = goal[1]
     return abs(current_row - goal_row) + abs(current_col - goal_col)
 
-    
-print(heuristic((2, 3), (3, 3)))
-print(heuristic((1, 1), (3, 3)))
+
+row = 0
+col = 0
+goal = (3, 3)
+
+
+best_action = None
+best_score = None
+
+
+move = {
+    "up": (row - 1, col),
+    "down": (row + 1, col),
+    "left": (row, col - 1),
+    "right": (row, col + 1),
+}
+
+valid_moves = {}
+
+
+for action, position in move.items():
+    row, col = position
+
+    if not in_bounds(row, col, grid):
+        continue
+    cell = grid[row][col]
+
+    if is_valid_move(cell):
+        valid_moves[action] = position
+        
+
+for action, position in valid_moves.items():
+    row, col = position
+    cell = grid[row][col]
+    if is_goal(cell):
+        print(f"Goal reached at {position}")
+        break
+
+    score = heuristic(position, goal)
+  
+    if best_score is None or score < best_score:
+        best_score = score
+        best_action = action
+
+
+print("valid moves:", valid_moves)
+print(f"Best Move {best_action}  Best score {best_score}")
+
+
+
+
+
