@@ -4,14 +4,14 @@
 
 Understand the core ideas behind Artificial Intelligence before using ML frameworks, neural networks, or AI APIs.
 
-The goal is to understand:
+The goal is to understand how AI systems:
 
-- what AI is
-- how agents perceive an environment
-- how they make decisions
-- how search and heuristics work
-- how knowledge and reasoning are represented
-- how reinforcement learning differs from rule-based systems
+- perceive an environment
+- represent information
+- evaluate possible actions
+- make decisions
+- work toward goals
+- learn in systems such as Reinforcement Learning
 
 ---
 
@@ -24,19 +24,15 @@ AI can use:
 - rules
 - search
 - planning
-- knowledge representation
 - reasoning
-- machine learning
-- deep learning
-- reinforcement learning
+- knowledge representation
+- Machine Learning
+- Deep Learning
+- Reinforcement Learning
 
-Machine Learning is part of AI.
+Machine Learning is part of AI and allows systems to learn patterns from data.
 
-It allows systems to learn patterns from data instead of having every rule manually programmed.
-
-Deep Learning is part of Machine Learning.
-
-It uses neural networks with multiple layers.
+Deep Learning is part of Machine Learning and uses neural networks with multiple layers.
 
 ```text
 AI
@@ -51,101 +47,53 @@ AI
 └── Other approaches
 ```
 
+Not every AI system uses Machine Learning.
+
 ---
 
 ## 2. Intelligent Agents
 
-An intelligent agent receives information from its environment and chooses actions to achieve a goal.
-
-```text
-Environment
-    ↓
-Percept
-    ↓
-Agent
-    ↓
-Decision
-    ↓
-Action
-    ↓
-Environment changes
-```
+An intelligent agent receives information from an environment and chooses actions to achieve a goal.
 
 Important parts:
 
 - Environment: the world the agent interacts with
 - Percept: information received from the environment
 - Action: something the agent does
-- Agent function: maps percepts to actions
+- Agent function: maps information to actions
 
-An agent does not need Machine Learning.
-
-A rule-based agent can still be an AI system.
+A rule-based system can still be an intelligent agent.
 
 ---
 
 ## 3. Search
 
-Search means exploring possible states or actions to find a path or solution that reaches a goal.
+Search means exploring possible states or actions to find a solution that reaches a goal.
 
-```text
-Start
-  ↓
-Possible states
-  ↓
-Possible paths
-  ↓
-Goal
-```
-
-Search does not always mean finding the shortest path.
-
-The objective could be:
+A search objective might be finding a solution that is:
 
 - shortest
 - cheapest
 - safest
 - fastest
 
-Actual search algorithms will be studied later.
+Actual search algorithms are studied later.
 
 ---
 
 ## 4. Heuristics
 
-A heuristic is an estimate that helps guide a search or decision toward a promising option.
+A heuristic is an estimate that helps guide a system toward a promising option.
 
-Example:
+A heuristic can make decision making more efficient, but it does not automatically guarantee the best possible solution.
 
-```text
-Position A = 10
-Position B = 5
-Position C = 8
-```
-
-If lower is better, the system may prefer Position B.
-
-A heuristic helps reduce unnecessary exploration, but it does not always guarantee the best result.
+The Phase 1 project uses **Manhattan distance** as its heuristic.
 
 ---
 
 ## 5. Planning
 
 Planning means creating a sequence of actions that can achieve a goal.
-
-```text
-Current state
-    ↓
-Action
-    ↓
-New state
-    ↓
-Action
-    ↓
-Goal
-```
-
-Difference:
 
 ```text
 Search:
@@ -161,7 +109,7 @@ What sequence of actions should I perform?
 
 Decision making means choosing an action from available options.
 
-A decision can depend on:
+A decision may depend on:
 
 - goals
 - constraints
@@ -170,8 +118,6 @@ A decision can depend on:
 - reward
 - expected outcome
 - heuristic score
-
-Simple distinction:
 
 ```text
 Decision:
@@ -185,9 +131,9 @@ What sequence of actions should I perform?
 
 ## 7. Knowledge Representation
 
-Knowledge representation is how information is structured so an AI system can use it.
+Knowledge representation describes how information is structured so an AI system can use it.
 
-A simple system can use facts and rules.
+A simple representation can contain facts and rules.
 
 ```text
 Fact:
@@ -202,17 +148,18 @@ then it is an animal.
 
 ## 8. Reasoning
 
-Reasoning means using known facts and rules to derive new information.
+Reasoning means using known information and rules to derive new information.
 
 ```text
 Rex is a dog
 +
 Dogs are animals
-↓
+
+Result:
 Rex is an animal
 ```
 
-Knowledge representation stores the knowledge.
+Knowledge representation stores knowledge.
 
 Reasoning uses that knowledge.
 
@@ -222,18 +169,6 @@ Reasoning uses that knowledge.
 
 Reinforcement Learning is an approach where an agent learns through interaction with an environment.
 
-```text
-Agent
-  ↓
-Action
-  ↓
-Environment
-  ↓
-Reward
-  ↓
-Agent learns
-```
-
 Important parts:
 
 - Agent: the learner
@@ -241,14 +176,12 @@ Important parts:
 - Reward: feedback from an action
 - Policy: strategy used to choose actions
 
-Difference from a rule-based system:
-
 ```text
 Rule-based system:
-Developer writes the behavior.
+Developer programs the behavior.
 
 Reinforcement Learning:
-Agent learns behavior from rewards and experience.
+Agent learns behavior through rewards and experience.
 ```
 
 ---
@@ -261,13 +194,13 @@ The Phase 1 project is a small Python agent that navigates a grid using rules an
 
 It deliberately does not use Machine Learning.
 
-Project location:
+Project:
 
 ```text
 projects/rule-based-grid-agent/
 ```
 
-Main file:
+Main implementation:
 
 ```text
 projects/rule-based-grid-agent/agent.py
@@ -291,124 +224,149 @@ G = goal
 . = open cell
 ```
 
-The final agent loop should be:
+---
+
+## Agent Design
+
+The project is organized into small functions with clear responsibilities.
 
 ```text
-Perceive
-    ↓
-Generate possible actions
-    ↓
-Check boundaries
-    ↓
-Reject obstacles
-    ↓
-Keep valid moves
-    ↓
-Calculate heuristic scores
-    ↓
-Choose best action
-    ↓
-Move
-    ↓
-Update position
-    ↓
-Track path
-    ↓
-Goal reached?
-    ↓
-No: repeat
-Yes: stop
+get_possible_moves()
+Generate possible actions.
+
+is_in_bounds()
+Check whether a position exists inside the grid.
+
+is_valid_move()
+Reject positions outside the grid or blocked by obstacles.
+
+get_valid_moves()
+Keep only usable actions.
+
+heuristic()
+Calculate Manhattan distance to the goal.
+
+choose_best_move()
+Choose the valid action with the lowest heuristic score.
+
+move_agent()
+Return the position belonging to the chosen action.
+
+is_goal()
+Check whether the agent reached the goal.
+
+run_agent()
+Control the complete agent cycle.
 ```
 
 ---
 
-## Current Project Progress
+## Agent Cycle
 
-Completed:
+The completed agent performs this process repeatedly:
 
-- grid environment
-- starting position
-- goal position
-- `(row, column)` position representation
+```text
+Current position
+    |
+Generate possible moves
+    |
+Check boundaries and obstacles
+    |
+Keep valid moves
+    |
+Calculate heuristic scores
+    |
+Choose best move
+    |
+Move
+    |
+Update current position
+    |
+Track path
+    |
+Check goal
+    |
+Repeat until goal
+```
+
+The agent now moves from `S` toward `G`, avoids obstacles, records its path, and stops when the goal is reached.
+
+---
+
+## What This Project Reinforces
+
+The project connects the main Phase 1 concepts:
+
+- intelligent agents
+- environment
+- percepts
+- actions
+- state representation
+- rules
+- heuristics
+- decision making
+- goal checking
+- repeated agent behavior
+
+It also demonstrates an important idea:
+
+**AI does not automatically mean Machine Learning.**
+
+This agent performs goal-directed behavior using ordinary Python rules and a heuristic.
+
+---
+
+# Progress
+
+## Rule-Based Grid Agent
+
+Approximately **95% complete**.
+
+The core agent is complete:
+
+- environment
+- current state
 - possible actions
-- perception of neighboring cells
 - boundary checking
 - obstacle checking
-- valid-move filtering
-- goal checking
+- valid-action filtering
 - Manhattan-distance heuristic
-- heuristic scoring
-- best-action selection
-
-Current agent can:
-
-```text
-Environment
-    ↓
-Generate moves
-    ↓
-Check boundaries
-    ↓
-Perceive cells
-    ↓
-Reject obstacles
-    ↓
-Keep valid moves
-    ↓
-Score moves
-    ↓
-Choose best action
-```
-
-The agent can decide which move looks best, but it does not move through the grid yet.
-
----
-
-## Next Steps
-
-1. Update the agent position using `best_action`.
-2. Track the path.
-3. Repeat the decision process.
-4. Stop when `G` is reached.
-5. Test the full agent.
-6. Refactor the learning version into cleaner functions.
-
----
-
-## Progress
-
-### Rule-Based Grid Agent
-
-Approximately **75% complete**.
+- decision making
+- movement
+- path tracking
+- agent loop
+- goal detection
+- organized function structure
 
 Remaining work:
 
-- movement
-- agent loop
-- path tracking
 - final testing
-- refactoring
+- handle the case where no valid move exists
+- optional cleanup after testing
 
-### Phase 1
+---
 
-Approximately **85% complete**.
+## Phase 1
 
-The theory is mostly complete.
+Approximately **95% complete**.
 
-The main remaining work is:
+The theory has been studied and the Phase 1 project is functionally complete.
 
-- finish the Rule-Based Grid Agent
-- verify the Phase 1 exit criteria
+The remaining work is mainly:
+
+- final project verification
+- Phase 1 retrieval test
+- verify the exit criteria without relying on notes
 
 ---
 
 # Exit Criteria
 
-Before finishing Phase 1, I should be able to explain without notes:
+Before completing Phase 1, I should be able to explain without notes:
 
 - AI vs Machine Learning vs Deep Learning
 - intelligent agents
-- environment, percepts, and actions
+- environments, percepts, and actions
 - agent functions
 - search
 - heuristics
@@ -420,16 +378,28 @@ Before finishing Phase 1, I should be able to explain without notes:
 - agent, environment, reward, and policy
 - rule-based systems vs Reinforcement Learning
 
-I should also be able to build a simple rule-based agent that moves from `S` to `G`.
+I should also understand how the Rule-Based Grid Agent:
 
-The final goal is to look at an AI system and understand:
+- represents its environment
+- represents its current state
+- generates actions
+- rejects invalid actions
+- evaluates valid actions
+- chooses a move
+- updates its state
+- records its path
+- repeats until reaching its goal
+
+The final objective is to look at an AI system and understand:
 
 ```text
 What does it know?
 
 What does it perceive?
 
-How does it make decisions?
+What actions can it take?
 
-How does it reach its goal?
+How does it choose an action?
+
+How does it know when its goal has been reached?
 ```
