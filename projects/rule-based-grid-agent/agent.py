@@ -34,6 +34,7 @@ goal = (3, 3)
 # This function does not check whether those positions
 # are valid yet.
 
+
 def get_possible_moves(current_position):
     row, col = current_position
 
@@ -54,6 +55,7 @@ def get_possible_moves(current_position):
 #
 # Positions outside the grid cannot be used by the agent.
 
+
 def is_in_bounds(position, grid):
     row, col = position
 
@@ -71,6 +73,7 @@ def is_in_bounds(position, grid):
 # 1. The position is inside the grid.
 # 2. The cell is not an obstacle.
 
+
 def is_valid_move(position, grid, obstacle="#"):
     row, col = position
 
@@ -87,6 +90,7 @@ def is_valid_move(position, grid, obstacle="#"):
 # ============================================================
 # Start with every possible move and keep only the moves
 # the agent is actually allowed to make.
+
 
 def get_valid_moves(possible_moves, grid):
     valid_moves = {}
@@ -114,6 +118,7 @@ def get_valid_moves(possible_moves, grid):
 # A smaller score means the position appears closer
 # to the goal.
 
+
 def heuristic(position, goal):
     row, col = position
     goal_row, goal_col = goal
@@ -130,6 +135,7 @@ def heuristic(position, goal):
 #
 # best_score stores the smallest score found so far.
 # best_move stores the action that produced that score.
+
 
 def choose_best_move(valid_moves, goal):
     best_move = None
@@ -151,6 +157,7 @@ def choose_best_move(valid_moves, goal):
 # The goal is reached when the agent's current position
 # is the same as the goal position.
 
+
 def is_goal(current_position, goal):
     return current_position == goal
 
@@ -160,6 +167,7 @@ def is_goal(current_position, goal):
 # ============================================================
 # Convert the chosen action into the position that the
 # agent should move to.
+
 
 def move_agent(best_move, valid_moves):
     return valid_moves[best_move]
@@ -181,6 +189,7 @@ def move_agent(best_move, valid_moves):
 # 7. Record the new position.
 # 8. Repeat until the goal is reached.
 
+
 def run_agent():
     current_position = (0, 0)
 
@@ -190,7 +199,6 @@ def run_agent():
 
     # Continue making decisions until the goal is reached.
     while not is_goal(current_position, goal):
-
         # Generate possible actions from the current position.
         possible_moves = get_possible_moves(current_position)
 
