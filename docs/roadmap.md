@@ -109,7 +109,7 @@ Combine all three phases: take a real small dataset (Pandas/NumPy), formulate on
 ## Portfolio Checklist (Stage 1)
 - [x] Written AI/ML/deep-learning explanation with real examples
 - [x] Rule-based grid agent project
-- [ ] State-space search solver (maze or 8-puzzle) with a written formulation
+- [x] State-space search solver (maze or 8-puzzle) with a written formulation
 - [ ] Exploratory data analysis script on a real dataset
 - [ ] Stage 1 milestone write-up connecting all three phases
 

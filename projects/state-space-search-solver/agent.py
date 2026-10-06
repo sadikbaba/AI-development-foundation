@@ -1,11 +1,14 @@
 maze = [
-    ["S", ".", ".", "#"],
-    ["#", ".", ".", "#"],
-    [".", ".", ".", "G"],
+    ["S", ".", ".", "#", "."],
+    [".", ".", ".", ".", "."],
+    [".", "#", ".", ".", "."],
+    [".", "#", ".", "#", "."],
+    [".", "#", ".", ".", "G"],
+    [".", ".", ".", ".", "."],
 ]
 
 initial_state = (0, 0)
-goal = (2, 3)
+goal = (4, 4)
 
 
 def get_possible_moves(state):
@@ -185,15 +188,97 @@ def bfs_search(maze, initial_state, goal):
     return None
 
 
-def dfs_search(maze, initial_state, goal): ...
+def dfs_search(maze, initial_state, goal):
+
+    frontier = [(initial_state, [initial_state])]
+
+    visited = {initial_state}
+
+    while frontier:
+        current_state, current_path = frontier.pop()
+        if current_state == goal:
+            return current_path
+
+        valid_next_states = get_valid_next_states(current_state, maze)
+
+        for _, next_state in valid_next_states.items():
+            if next_state not in visited:
+                visited.add(next_state)
+                new_path = current_path + [next_state]
+                frontier.append((next_state, new_path))
+
+    return None
 
 
-def greedy_search(maze, initial_state, goal): ...
+def greedy_search(maze, initial_state, goal):
+    frontier = [(initial_state, [initial_state])]
+
+    visited = {initial_state}
+
+    while frontier:
+        # Start by assuming the first frontier item is the best.
+        best_index = 0
+
+        first_state, _ = frontier[0]
+        best_score = heuristic(first_state, goal)
+
+        # Check every frontier state.
+        for index, (state, _) in enumerate(frontier):
+            score = heuristic(state, goal)
+
+            # If this state looks closer to the goal,
+            # remember its index and score.
+            if score < best_score:
+                best_score = score
+                best_index = index
+
+        # Remove the frontier item with the lowest heuristic.
+        current_state, current_path = frontier.pop(best_index)
+
+        # Check whether that chosen state is the goal.
+        if current_state == goal:
+            return current_path
+
+        valid_next_states = get_valid_next_states(
+            current_state,
+            maze,
+        )
+
+        for _, next_state in valid_next_states.items():
+            if next_state not in visited:
+                visited.add(next_state)
+
+                new_path = current_path + [next_state]
+
+                frontier.append((next_state, new_path))
+
+    return None
 
 
-def evaluate_solution(path): ...
+def evaluate_solution(path):
+    if path is None:
+        return None
+
+    states = len(path)
+    moves = len(path) - 1
+
+    return [states, moves]
 
 
-def run_searches(): ...
+def run_searches():
+    bfs_path = bfs_search(maze, initial_state, goal)
+    dfs_path = dfs_search(maze, initial_state, goal)
+    greedy_path = greedy_search(maze, initial_state, goal)
+
+    evaluations = [
+        evaluate_solution(bfs_path),
+        evaluate_solution(dfs_path),
+        evaluate_solution(greedy_path),
+    ]
+
+    print("BFS:", evaluations[0])
+    print("DFS:", evaluations[1])
+    print("Greedy:", evaluations[2])
 
 
+run_searches()

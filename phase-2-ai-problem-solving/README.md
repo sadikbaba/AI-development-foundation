@@ -2,59 +2,26 @@
 
 ## Goal
 
-Learn how to describe a problem in a form that an AI system can reason about.
+Learn how to describe a problem in a form an AI system can reason about before solving it.
 
-## 1. Problem Formulation
+## Core Concepts
 
-What does it mean to formulate a problem?
-
-## 2. States
-
-What is a state?
-
-How does a state describe the current situation?
-
-## 3. Actions
-
-What can change from one state to another?
-
-## 4. Goals
-
-What does the system need to achieve?
-
-## 5. Goal Tests
-
-How does the system know it has succeeded?
-
-## 6. State Spaces
-
-How possible states form a search space.
-
-## 7. Constraints
-
-What makes a state or action invalid?
-
-## 8. Search Strategies
-
-Uninformed vs informed search.
-
-Conceptual understanding only at first.
-
-## 9. Optimization
-
-Finding a good solution versus finding any valid solution.
-
-## 10. Evaluation
-
-How do we decide whether a solution is actually useful?
+- Problem formulation
+- States and actions
+- Goals and goal tests
+- State spaces
+- Constraints
+- Uninformed vs informed search
+- Optimization
+- Evaluation
 
 ## Practical Exercise
 
-Formulate a maze or 8-puzzle as:
+Formulate a maze as:
 
-- States
-- Actions
+- State
 - Initial state
+- Actions
 - Goal
 - Goal test
 - Constraints
@@ -62,10 +29,22 @@ Formulate a maze or 8-puzzle as:
 
 ## Project
 
-Build a small state-space search solver.
+Build a small state-space search solver using:
 
-The search algorithm is not the main lesson. The important skill is learning to formulate the problem correctly before writing code.
+- BFS
+- DFS
+- Greedy Search
+
+The main lesson is not memorizing search algorithms. It is learning how to correctly formulate a problem before writing the solution.
 
 ## Exit Criteria
 
-Given an unfamiliar problem, formulate its states, actions, goal, and constraints without relying on a predefined example.
+Given an unfamiliar problem, independently define its:
+
+- States
+- Actions
+- Goal
+- Goal test
+- Constraints
+
+without relying on a predefined example.
