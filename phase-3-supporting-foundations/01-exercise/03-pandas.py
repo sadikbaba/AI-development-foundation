@@ -64,3 +64,14 @@ print(students.isna())
 print("\n")
 clean_students = students.dropna()
 print(clean_students)
+
+# fill missing values
+print("\n")
+students = pd.DataFrame({
+    "name": ["Ali", "Sara", "Musa"],
+    "score": [80, None, 70]
+})
+
+filled_students = students.fillna(0)
+
+print(filled_students)
