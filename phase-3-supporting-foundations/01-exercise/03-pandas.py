@@ -29,33 +29,28 @@ print("\n")
 
 # using below i will filter the result from 70 to higher
 
-scores = pd.DataFrame({
-    "name": ["Ali", "Sara", "Musa"],
-    "score": [55, 80, 70],
-})
+scores = pd.DataFrame(
+    {
+        "name": ["Ali", "Sara", "Musa"],
+        "score": [55, 80, 70],
+    }
+)
 
 high_scores = scores[scores["score"] >= 70]
 print(high_scores)
 
 
-# group by 
+# group by
 print("\n")
-students = pd.DataFrame({
-    "class": ["A", "A", "B", "B"],
-    "score": [60, 80, 70, 90]
-})
+students = pd.DataFrame({"class": ["A", "A", "B", "B"], "score": [60, 80, 70, 90]})
 
-average_score =students.groupby("class")["score"].mean()
+average_score = students.groupby("class")["score"].mean()
 print(average_score)
-
 
 
 #  missing values
 print("\n")
-students = pd.DataFrame({
-    "name": ["Ali", "Sara", "Musa"],
-    "score": [80, None, 70]
-})
+students = pd.DataFrame({"name": ["Ali", "Sara", "Musa"], "score": [80, None, 70]})
 
 print(students)
 print("\n")
@@ -67,10 +62,7 @@ print(clean_students)
 
 # fill missing values
 print("\n")
-students = pd.DataFrame({
-    "name": ["Ali", "Sara", "Musa"],
-    "score": [80, None, 70]
-})
+students = pd.DataFrame({"name": ["Ali", "Sara", "Musa"], "score": [80, None, 70]})
 
 filled_students = students.fillna(0)
 
