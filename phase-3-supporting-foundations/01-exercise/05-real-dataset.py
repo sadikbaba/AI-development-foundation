@@ -28,3 +28,6 @@ print("\n")
 print("Mean of body_mass_g:", mean_body_mass_g)
 
 
+# write to csv
+clean_penguins.to_csv("data/penguins_clean.csv")
+print("done")
