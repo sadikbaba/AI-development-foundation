@@ -15,8 +15,16 @@ def variance(values):
     ans = variance / len(values)
     return ans
 
-values = [1, 2, 3, 4, 5]
-print(variance(values))
 
-values = [2,2,8]
-print(variance(values))
+if __name__ == "__main__":
+    values = [1, 2, 3, 4, 5]
+    print(variance(values))
+
+    values = [2,2,8]
+    print(variance(values))
+
+    values = [4, 4, 4]
+    print(variance(values))
+
+    values = [1, 4, 7]
+    print(variance(values))
