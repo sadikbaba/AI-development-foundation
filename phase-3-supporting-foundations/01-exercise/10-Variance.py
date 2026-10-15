@@ -5,6 +5,7 @@
 def mean_number(values):
     return sum(values) / len(values)
 
+
 def variance(values):
     mean = mean_number(values)
 
@@ -20,7 +21,7 @@ if __name__ == "__main__":
     values = [1, 2, 3, 4, 5]
     print(variance(values))
 
-    values = [2,2,8]
+    values = [2, 2, 8]
     print(variance(values))
 
     values = [4, 4, 4]

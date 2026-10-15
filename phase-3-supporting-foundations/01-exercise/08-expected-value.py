@@ -1,4 +1,3 @@
-
 #  my own way to understand it
 # expected value = Σ (value × probability)
 
@@ -33,7 +32,7 @@ probabilities = [0.1, 0.4, 0.5]
 
 print(expected_value(values, probabilities))
 
-values = [0,20, 50]
+values = [0, 20, 50]
 probabilities = [0.5, 0.3, 0.2]
 
 print(expected_value(values, probabilities))
