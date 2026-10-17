@@ -19,12 +19,10 @@ def correlation(values_x, values_y):
         dy = values_y[i] - mean_y
 
         numerator += dx * dy
-        sum_dx_squared += dx ** 2
-        sum_dy_squared += dy ** 2
+        sum_dx_squared += dx**2
+        sum_dy_squared += dy**2
 
-    denominator = math.sqrt(
-        sum_dx_squared * sum_dy_squared
-    )
+    denominator = math.sqrt(sum_dx_squared * sum_dy_squared)
 
     r = numerator / denominator
     return r
